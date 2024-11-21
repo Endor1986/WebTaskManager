@@ -1,0 +1,34 @@
+﻿@model WebTaskManager.Models.TaskModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Neue Aufgabe hinzufügen</title>
+</head>
+<body>
+    <h1>Neue Aufgabe hinzufügen</h1>
+    <form asp-action="Create" method="post">
+        <div>
+            <label>Titel:</label>
+            <input asp-for="Title" />
+        </div>
+        <div>
+            <label>Beschreibung:</label>
+            <textarea asp-for="Description"></textarea>
+        </div>
+        <div>
+            <label>Kategorie:</label>
+            <input asp-for="Category" />
+        </div>
+        <div>
+            <label>Fälligkeitsdatum:</label>
+            <input asp-for="DueDate" type="date" />
+        </div>
+        <div>
+            <label>Erledigt:</label>
+            <input asp-for="IsCompleted" type="checkbox" />
+        </div>
+        <button type="submit">Speichern</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebTaskManager.Models.TaskModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task Manager</h1>
+
+    <button onclick="window.location.href='/Task/Create'">Aufgabe Hinzufügen</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category</th> <!-- Kategorie hinzugefügt -->
+                <th>Due Date</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td>@task.Title</td>
+                    <td>@task.Description</td>
+                    <td>@task.Category</td> <!-- Kategorie anzeigen -->
+                    <td>@task.DueDate.ToShortDateString()</td>
+                    <td>@(task.IsCompleted ? "Ja" : "Nein")</td>
+                    <td>
+                        <form asp-action="MarkAsDone" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@task.Id" />
+                            <button type="submit">Aufgabe Erledigt</button>
+                        </form>
+                        <form asp-action="Delete" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@task.Id" />
+                            <button type="submit">Aufgabe Löschen</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
